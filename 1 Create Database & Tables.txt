@@ -1,0 +1,34 @@
+psql --username=freecodecamp --dbname=postgres
+
+CREATE DATABASE worldcup;
+
+\c worldcup;
+
+CREATE TABLE teams(
+team_id SERIAL PRIMARY KEY,
+name VARCHAR(20) NOT NULL UNIQUE
+);
+ALTER TABLE teams ALTER COLUMN name SET NOT NULL;
+
+CREATE TABLE games(
+game_id SERIAL PRIMARY KEY,
+year INT NOT NULL,
+round VARCHAR NOT NULL,
+winner_goals INT NOT NULL,
+opponent_goals INT NOT NULL
+);
+ALTER TABLE games ADD COLUMN winner_id INT REFERENCES teams(team_id);
+ALTER TABLE games ADD COLUMN opponent_id INT REFERENCES teams(team_id);
+ALTER TABLE games ALTER COLUMN winner_id SET NOT NULL;
+ALTER TABLE games ALTER COLUMN opponent_id SET NOT NULL;
+
+
+
+
+
+
+
+
+
+
+
